@@ -96,3 +96,5 @@ def benchmark_insertion(movies: list) -> dict:
         print(f"{size:<10} {hm_time:<22.6f} {trie_time:<22.6f}")
 
     return results
+
+
