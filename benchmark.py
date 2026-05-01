@@ -80,3 +80,7 @@ def benchmark_insertion(movies: list) -> dict:
                 hm.insert(movie.title.lower(), movie)
                 hm.insert(movie.movie_id, movie)
 
+        def do_trie_insert():
+            trie = Trie()
+            for movie in subset:
+                trie.insert(movie.title, movie)
