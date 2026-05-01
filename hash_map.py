@@ -32,3 +32,8 @@ class HashMap:
         index = self._hash(key)
         node = self._buckets[index]
 
+        while node is not None:
+            if node.key == key:
+                node.value = value
+                return
+            node = node.next
