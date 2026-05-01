@@ -174,3 +174,11 @@ def benchmark_prefix_search(movies: list) -> dict:
    
 
     results = {}
+
+    for size in DATASET_SIZES:
+        subset = movies[:size]
+
+        trie = Trie()
+        for movie in subset:
+            trie.insert(movie.title, movie)
+
