@@ -74,3 +74,8 @@ def benchmark_insertion(movies: list) -> dict:
     for size in DATASET_SIZES:
         subset = movies[:size]
 
+        def do_hashmap_insert():
+            hm = HashMap()
+            for movie in subset:
+                hm.insert(movie.title.lower(), movie)
+                hm.insert(movie.movie_id, movie)
