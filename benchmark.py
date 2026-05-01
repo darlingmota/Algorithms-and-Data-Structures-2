@@ -159,3 +159,5 @@ def benchmark_exact_search(movies: list) -> dict:
         )
 
     return results
+
+
