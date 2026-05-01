@@ -189,3 +189,13 @@ def benchmark_prefix_search(movies: list) -> dict:
         def do_linear_prefix():
             for prefix in PREFIX_QUERIES:
                 linear_prefix_search(subset, prefix)
+
+        trie_time = _average_time(do_trie_prefix)
+        linear_time = _average_time(do_linear_prefix)
+        speedup = linear_time / trie_time if trie_time > 0 else float('inf')
+
+        results[size] = {
+            "trie_prefix": trie_time,
+            "linear_prefix": linear_time,
+            "speedup": speedup,
+        }
