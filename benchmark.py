@@ -161,3 +161,16 @@ def benchmark_exact_search(movies: list) -> dict:
     return results
 
 
+def benchmark_prefix_search(movies: list) -> dict:
+  
+    print("benchmark 3 prefix search time (autocomplete)")
+    print(f"  trials per measurement: {TRIALS}")
+    print(f"  prefix queries: {PREFIX_QUERIES}")
+    print("  theoretical: trie O(k + m), linear scan O(n)")
+
+
+    header = f"{'Size':<10} {'Trie (s)':<22} {'Linear (s)':<22} {'Speedup':<12}"
+    print(header)
+   
+
+    results = {}
