@@ -1,4 +1,8 @@
 
+# All the experimental benchmarks live here.
+
+# Each timed experiment is repeated trials times and averaged.
+
 import time
 import random
 import tracemalloc
@@ -7,17 +11,22 @@ from hash_map import HashMap
 from trie import Trie
 
 
+# How many times each timing test is repeated to smooth out noise
 TRIALS = 5
 
+# max dataset sizing 
 
 DATASET_SIZES = [500, 1000, 2000, 5000, 10000, 20000, 27278]
 
+# prefix queries used for the prefix benchmarks
 PREFIX_QUERIES = ["the", "star", "da", "a", "love", "man", "night", "dark", "war", "inc"]
 
+# how many random titles  to look up per exact search test
 EXACT_QUERY_COUNT = 20
 
 
 
+# runs trials times and returns the average time in seconds
 def _average_time(func, trials: int = TRIALS) -> float:
     times = []
     for _ in range(trials):
@@ -29,6 +38,7 @@ def _average_time(func, trials: int = TRIALS) -> float:
 
 
 
+# brute force exact title search through a plain list
 def linear_exact_search(movies: list, title: str):
     target = title.lower()
     for movie in movies:
@@ -37,3 +47,4 @@ def linear_exact_search(movies: list, title: str):
     return None
 
 
+def linear_exact_search_by_id(movies: list, movie_id: int):
