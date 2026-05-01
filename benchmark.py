@@ -217,3 +217,15 @@ def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
     
 
     results = {}
+
+    for size in DATASET_SIZES:
+        subset = movies[:size]
+
+        hm = HashMap()
+        trie = Trie()
+        for movie in subset:
+            hm.insert(movie.title.lower(), movie)
+            trie.insert(movie.title, movie)
+
+        sample = random.sample(subset, min(EXACT_QUERY_COUNT, len(subset)))
+        titles = [m.title for m in sample]
