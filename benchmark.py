@@ -182,3 +182,10 @@ def benchmark_prefix_search(movies: list) -> dict:
         for movie in subset:
             trie.insert(movie.title, movie)
 
+        def do_trie_prefix():
+            for prefix in PREFIX_QUERIES:
+                trie.search_prefix(prefix)
+
+        def do_linear_prefix():
+            for prefix in PREFIX_QUERIES:
+                linear_prefix_search(subset, prefix)
