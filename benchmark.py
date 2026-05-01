@@ -48,3 +48,7 @@ def linear_exact_search(movies: list, title: str):
 
 
 def linear_exact_search_by_id(movies: list, movie_id: int):
+    for movie in movies:
+        if movie.movie_id == movie_id:
+            return movie
+    return None
