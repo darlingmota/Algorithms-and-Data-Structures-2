@@ -37,3 +37,7 @@ class HashMap:
                 node.value = value
                 return
             node = node.next
+        new_node = HashMapNode(key, value)
+        new_node.next = self._buckets[index]
+        self._buckets[index] = new_node
+        self._size += 1
