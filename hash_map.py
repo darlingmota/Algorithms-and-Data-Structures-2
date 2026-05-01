@@ -41,3 +41,11 @@ class HashMap:
         new_node.next = self._buckets[index]
         self._buckets[index] = new_node
         self._size += 1
+    def search(self, key):
+        index = self._hash(key)
+        node = self._buckets[index]
+        while node is not None:
+            if node.key == key:
+                return node.value
+            node = node.next
+        return None
