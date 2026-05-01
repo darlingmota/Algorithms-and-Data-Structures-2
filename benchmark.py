@@ -136,3 +136,26 @@ def benchmark_exact_search(movies: list) -> dict:
         def do_linear_title_search():
             for title in titles:
                 linear_exact_search(subset, title)
+
+        def do_linear_id_search():
+            for mid in ids:
+                linear_exact_search_by_id(subset, mid)
+
+        hm_title_time = _average_time(do_hm_title_search)
+        hm_id_time = _average_time(do_hm_id_search)
+        linear_title_time = _average_time(do_linear_title_search)
+        linear_id_time = _average_time(do_linear_id_search)
+
+        results[size] = {
+            "hashmap_title": hm_title_time,
+            "hashmap_id": hm_id_time,
+            "linear_title": linear_title_time,
+            "linear_id": linear_id_time,
+        }
+
+        print(
+            f"{size:<10} {hm_title_time:<18.8f} "
+            f"{hm_id_time:<16.8f} {linear_title_time:<18.8f} {linear_id_time:<16.8f}"
+        )
+
+    return results
