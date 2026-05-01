@@ -35,3 +35,5 @@ def linear_exact_search(movies: list, title: str):
         if movie.title.lower() == target:
             return movie
     return None
+
+
