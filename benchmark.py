@@ -199,3 +199,7 @@ def benchmark_prefix_search(movies: list) -> dict:
             "linear_prefix": linear_time,
             "speedup": speedup,
         }
+
+        print(f"{size:<10} {trie_time:<22.6f} {linear_time:<22.6f} {speedup:<11.2f}x")
+
+    return results
