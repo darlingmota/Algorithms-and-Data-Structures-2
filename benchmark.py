@@ -249,3 +249,5 @@ def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
         }
 
         print(f"{size:<10} {hm_time:<22.6f} {trie_time:<22.6f} {winner:<18}")
+
+    return results
