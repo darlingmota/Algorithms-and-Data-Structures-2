@@ -33,3 +33,11 @@ def load_movies(movies_path: str, ratings_path: str = None) -> list:
                 # print a progress update every 2 million rows so I know it's still alive
                 if rows_processed % 2_000_000 == 0:
                     print(f"[DataLoader]   ... {rows_processed:,} ratings processed")
+
+        print(f"[DataLoader] Done. {rows_processed:,} ratings across "
+              f"{len(rating_totals):,} unique movies.\n")
+    else:
+        if ratings_path:
+            print(f"[DataLoader] error: ratings file not found at '{ratings_path}'")
+            print(f"[DataLoader] Continuing without rating data.\n")
+
