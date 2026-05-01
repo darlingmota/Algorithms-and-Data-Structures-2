@@ -48,3 +48,13 @@ class Trie:
                 break
             self._collect_all(child, results, max_results)
 
+    def search_exact(self, title: str) -> list:
+        key = title.lower()
+        node = self._root
+
+        for char in key:
+            if char not in node.children:
+                return []
+            node = node.children[char]
+
+        return node.movies if node.is_end_of_word else []
