@@ -129,3 +129,10 @@ def benchmark_exact_search(movies: list) -> dict:
             for title in titles:
                 hm.search(title.lower())
 
+        def do_hm_id_search():
+            for mid in ids:
+                hm.search(mid)
+
+        def do_linear_title_search():
+            for title in titles:
+                linear_exact_search(subset, title)
