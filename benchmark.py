@@ -203,3 +203,17 @@ def benchmark_prefix_search(movies: list) -> dict:
         print(f"{size:<10} {trie_time:<22.6f} {linear_time:<22.6f} {speedup:<11.2f}x")
 
     return results
+
+
+def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
+    
+    print("benchmark 4 trie exact vs hashmap exact")
+    print(f"  trials per measurement: {TRIALS}")
+    print("  theoretical: HashMap O(1), Trie O(k) where k = title length")
+    
+
+    header = f"{'Size':<10} {'HashMap (s)':<22} {'Trie (s)':<22} {'Winner':<18}"
+    print(header)
+    
+
+    results = {}
