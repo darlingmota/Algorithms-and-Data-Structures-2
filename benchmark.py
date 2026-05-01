@@ -251,3 +251,13 @@ def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
         print(f"{size:<10} {hm_time:<22.6f} {trie_time:<22.6f} {winner:<18}")
 
     return results
+
+
+
+def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
+    if dataset_sizes is None:
+        dataset_sizes = DATASET_SIZES
+
+    print("\n" + "-" * 70)
+    print("benchmark 5 - memory usage ")
+    print("  Tool: tracemalloc")
