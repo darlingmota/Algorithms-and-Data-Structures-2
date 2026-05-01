@@ -64,3 +64,5 @@ def benchmark_insertion(movies: list) -> dict:
     print("benchmark 1 - insertion time")
     print(f"  trials per measurement: {TRIALS}")
     print("  theoretical: hashmap O(1) avg per insert, trie O(k) where k=title length")
+    
+
