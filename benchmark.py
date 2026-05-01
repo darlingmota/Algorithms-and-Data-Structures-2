@@ -261,3 +261,10 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
     print("\n" + "-" * 70)
     print("benchmark 5 - memory usage ")
     print("  Tool: tracemalloc")
+ 
+
+    results = {}
+
+    for size in dataset_sizes:
+        subset = movies[:size]
+
