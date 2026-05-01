@@ -13,3 +13,5 @@ TRIALS = 5
 DATASET_SIZES = [500, 1000, 2000, 5000, 10000, 20000, 27278]
 
 PREFIX_QUERIES = ["the", "star", "da", "a", "love", "man", "night", "dark", "war", "inc"]
+
+EXACT_QUERY_COUNT = 20
