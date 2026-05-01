@@ -30,3 +30,7 @@ def _average_time(func, trials: int = TRIALS) -> float:
 
 
 def linear_exact_search(movies: list, title: str):
+    target = title.lower()
+    for movie in movies:
+        if movie.title.lower() == target:
+            return movie
