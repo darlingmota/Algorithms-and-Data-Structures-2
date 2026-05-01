@@ -113,3 +113,11 @@ def benchmark_exact_search(movies: list) -> dict:
     
 
     results = {}
+
+    for size in DATASET_SIZES:
+        subset = movies[:size]
+
+        hm = HashMap()
+        for movie in subset:
+            hm.insert(movie.title.lower(), movie)
+            hm.insert(movie.movie_id, movie)
