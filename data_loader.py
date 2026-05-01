@@ -61,3 +61,8 @@ def load_movies(movies_path: str, ratings_path: str = None) -> list:
                 rating_count = count
 
             movies.append(Movie(mid, title, genres, avg_rating, rating_count))
+
+    rated = sum(1 for m in movies if m.rating_count > 0)
+    print(f"[DataLoader] {len(movies):,} movies loaded.")
+    print(f"[DataLoader] {rated:,} have at least one rating.\n")
+    return movies
