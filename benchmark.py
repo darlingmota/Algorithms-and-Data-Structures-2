@@ -121,6 +121,11 @@ def benchmark_exact_search(movies: list) -> dict:
         for movie in subset:
             hm.insert(movie.title.lower(), movie)
             hm.insert(movie.movie_id, movie)
+
         sample = random.sample(subset, min(EXACT_QUERY_COUNT, len(subset)))
         titles = [m.title for m in sample]
         ids = [m.movie_id for m in sample]
+        def do_hm_title_search():
+            for title in titles:
+                hm.search(title.lower())
+
