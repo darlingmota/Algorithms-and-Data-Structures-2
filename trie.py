@@ -32,3 +32,7 @@ class Trie:
                 return []  # prefix doesn't exist
             node = node.children[char]
 
+        results = []
+        self._collect_all(node, results, max_results)
+        return results
+
