@@ -49,3 +49,23 @@ class HashMap:
                 return node.value
             node = node.next
         return None
+    def delete(self, key) -> bool:
+        index = self._hash(key)
+        node = self._buckets[index]
+        prev = None
+
+        while node is not None:
+            if node.key == key:
+                if prev is None:
+                    self._buckets[index] = node.next
+                else:
+                    prev.next = node.next
+                self._size -= 1
+                return True
+            prev = node
+            node = node.next
+        return False
+
+    def __len__(self) -> int:
+        return self._size
+
