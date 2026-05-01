@@ -98,3 +98,18 @@ def benchmark_insertion(movies: list) -> dict:
     return results
 
 
+def benchmark_exact_search(movies: list) -> dict:
+
+    print("benchmark 2 - exact search time")
+    print(f"  trials per measurement: {TRIALS}")
+    print("  theoretical: hashmap O(1) avg, linear scan O(n)")
+   
+
+    header = (
+        f"{'Size':<10} {'HM Title (s)':<18} "
+        f"{'HM ID (s)':<16} {'Lin Title (s)':<18} {'Lin ID (s)':<16}"
+    )
+    print(header)
+    
+
+    results = {}
