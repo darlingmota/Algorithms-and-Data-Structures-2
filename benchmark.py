@@ -229,3 +229,11 @@ def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
 
         sample = random.sample(subset, min(EXACT_QUERY_COUNT, len(subset)))
         titles = [m.title for m in sample]
+
+        def do_hm_exact():
+            for title in titles:
+                hm.search(title.lower())
+
+        def do_trie_exact():
+            for title in titles:
+                trie.search_exact(title)
