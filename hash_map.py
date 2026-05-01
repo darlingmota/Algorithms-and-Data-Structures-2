@@ -81,3 +81,7 @@ class HashMap:
                 self.insert(node.key, node.value)
                 node = node.next
 
+
+    def load_factor(self) -> float:
+        return self._size / self._capacity
+
