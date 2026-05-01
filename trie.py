@@ -5,3 +5,7 @@ class TrieNode:
         self.movies = []            # the actual Movie objects stored at the end
 
 
+class Trie:
+
+    def __init__(self):
+        self._root = TrieNode()
