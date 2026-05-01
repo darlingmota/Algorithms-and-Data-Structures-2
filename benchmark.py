@@ -26,3 +26,6 @@ def _average_time(func, trials: int = TRIALS) -> float:
         end = time.perf_counter()
         times.append(end - start)
     return sum(times) / len(times)
+
+
+
