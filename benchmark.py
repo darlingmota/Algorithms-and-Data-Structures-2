@@ -237,3 +237,15 @@ def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
         def do_trie_exact():
             for title in titles:
                 trie.search_exact(title)
+
+        hm_time = _average_time(do_hm_exact)
+        trie_time = _average_time(do_trie_exact)
+
+        winner = "hashmap faster" if hm_time < trie_time else "trie faster"
+
+        results[size] = {
+            "hashmap_exact": hm_time,
+            "trie_exact": trie_time,
+        }
+
+        print(f"{size:<10} {hm_time:<22.6f} {trie_time:<22.6f} {winner:<18}")
