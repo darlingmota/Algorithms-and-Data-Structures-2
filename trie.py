@@ -21,3 +21,9 @@ class Trie:
         node.is_end_of_word = True
         node.movies.append(movie)
         self._size += 1
+
+
+    def search_prefix(self, prefix: str, max_results: int = 50) -> list:
+        prefix_key = prefix.lower()
+        node = self._root
+
