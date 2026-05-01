@@ -27,3 +27,8 @@ class Trie:
         prefix_key = prefix.lower()
         node = self._root
 
+        for char in prefix_key:
+            if char not in node.children:
+                return []  # prefix doesn't exist
+            node = node.children[char]
+
