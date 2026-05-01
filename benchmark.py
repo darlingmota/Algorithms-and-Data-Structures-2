@@ -300,3 +300,27 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
 
     return results
 
+def print_summary(insertion: dict, exact: dict, prefix: dict, trie_vs_hm: dict):
+    
+
+    print(f"{'Size':<8} | {'HM Insert':>11} | {'Trie Insert':>11} | "
+          f"{'HM Exact':>11} | {'Lin Exact':>11} | "
+          f"{'Trie Prefix':>11} | {'Lin Prefix':>11} | {'Speedup':>9}")
+
+    for size in DATASET_SIZES:
+        ins = insertion.get(size, {})
+        ex = exact.get(size, {})
+        pr = prefix.get(size, {})
+
+        linear_time = ex.get('linear_title', 0)
+
+        print(
+            f"{size:<8} | "
+            f"{ins.get('hashmap_insert', 0):>11.6f} | "
+            f"{ins.get('trie_insert', 0):>11.6f} | "
+            f"{ex.get('hashmap_title', 0):>11.6f} | "
+            f"{linear_time:>11.6f} | "
+            f"{pr.get('trie_prefix', 0):>11.6f} | "
+            f"{pr.get('linear_prefix', 0):>11.6f} | "
+            f"{pr.get('speedup', 0):>8.2f}x"
+        )
