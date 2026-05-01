@@ -36,3 +36,15 @@ class Trie:
         self._collect_all(node, results, max_results)
         return results
 
+    def _collect_all(self, node: TrieNode, results: list, max_results: int):
+        if len(results) >= max_results:
+            return
+
+        if node.is_end_of_word:
+            results.extend(node.movies)
+
+        for child in node.children.values():
+            if len(results) >= max_results:
+                break
+            self._collect_all(child, results, max_results)
+
