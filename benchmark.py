@@ -29,3 +29,4 @@ def _average_time(func, trials: int = TRIALS) -> float:
 
 
 
+def linear_exact_search(movies: list, title: str):
