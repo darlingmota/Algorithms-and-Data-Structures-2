@@ -285,3 +285,9 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
         tracemalloc.stop()
         trie_memory_mb = trie_current / (1024 * 1024)
 
+        results[size] = {
+            "hashmap_memory_mb": hm_memory_mb,
+            "trie_memory_mb": trie_memory_mb,
+            "hashmap_per_item_kb": (hm_memory_mb * 1024) / (size * 2),
+            "trie_per_item_kb": (trie_memory_mb * 1024) / size,
+        }
