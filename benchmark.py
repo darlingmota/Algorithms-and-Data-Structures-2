@@ -47,6 +47,7 @@ def linear_exact_search(movies: list, title: str):
     return None
 
 
+# brute force exact id search through a plain list
 def linear_exact_search_by_id(movies: list, movie_id: int):
     for movie in movies:
         if movie.movie_id == movie_id:
@@ -54,11 +55,13 @@ def linear_exact_search_by_id(movies: list, movie_id: int):
     return None
 
 
+# brute force prefix search through a plain list
 def linear_prefix_search(movies: list, prefix: str) -> list:
     prefix_lower = prefix.lower()
     return [m for m in movies if m.title.lower().startswith(prefix_lower)]
 
 
+# how long it takes to build each structure from scratch
 def benchmark_insertion(movies: list) -> dict:
     
     print("benchmark 1 - insertion time")
@@ -74,12 +77,14 @@ def benchmark_insertion(movies: list) -> dict:
     for size in DATASET_SIZES:
         subset = movies[:size]
 
+        # build a HashMap from scratch each trial
         def do_hashmap_insert():
             hm = HashMap()
             for movie in subset:
                 hm.insert(movie.title.lower(), movie)
                 hm.insert(movie.movie_id, movie)
 
+        # build a Trie from scratch each trial
         def do_trie_insert():
             trie = Trie()
             for movie in subset:
@@ -98,6 +103,7 @@ def benchmark_insertion(movies: list) -> dict:
     return results
 
 
+# ---- Benchmark 2: exact search - HashMap vs linear scan ----
 def benchmark_exact_search(movies: list) -> dict:
 
     print("benchmark 2 - exact search time")
@@ -117,26 +123,33 @@ def benchmark_exact_search(movies: list) -> dict:
     for size in DATASET_SIZES:
         subset = movies[:size]
 
+        # build the structures once i'm timing search not insertion
         hm = HashMap()
         for movie in subset:
             hm.insert(movie.title.lower(), movie)
             hm.insert(movie.movie_id, movie)
 
+        # grab a random sample of titles and IDs to query
         sample = random.sample(subset, min(EXACT_QUERY_COUNT, len(subset)))
         titles = [m.title for m in sample]
         ids = [m.movie_id for m in sample]
+
+        # hashmaap by title
         def do_hm_title_search():
             for title in titles:
                 hm.search(title.lower())
 
+        # hashmap by ID
         def do_hm_id_search():
             for mid in ids:
                 hm.search(mid)
 
+        # linear scan by title
         def do_linear_title_search():
             for title in titles:
                 linear_exact_search(subset, title)
 
+        # linear scan by ID
         def do_linear_id_search():
             for mid in ids:
                 linear_exact_search_by_id(subset, mid)
@@ -161,6 +174,7 @@ def benchmark_exact_search(movies: list) -> dict:
     return results
 
 
+# prefix search trie vs linear scan 
 def benchmark_prefix_search(movies: list) -> dict:
   
     print("benchmark 3 prefix search time (autocomplete)")
@@ -178,14 +192,17 @@ def benchmark_prefix_search(movies: list) -> dict:
     for size in DATASET_SIZES:
         subset = movies[:size]
 
+        # build the trie once
         trie = Trie()
         for movie in subset:
             trie.insert(movie.title, movie)
 
+        # Trie prefix search across all the test queries
         def do_trie_prefix():
             for prefix in PREFIX_QUERIES:
                 trie.search_prefix(prefix)
 
+        # linear prefix search across all the test queries
         def do_linear_prefix():
             for prefix in PREFIX_QUERIES:
                 linear_prefix_search(subset, prefix)
@@ -205,6 +222,7 @@ def benchmark_prefix_search(movies: list) -> dict:
     return results
 
 
+# trie exact vs HashMap exact 
 def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
     
     print("benchmark 4 trie exact vs hashmap exact")
@@ -254,6 +272,7 @@ def benchmark_trie_vs_hashmap_exact(movies: list) -> dict:
 
 
 
+# Uses tracemalloc to measure how much memory each structure actually allocates.
 def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
     if dataset_sizes is None:
         dataset_sizes = DATASET_SIZES
@@ -268,6 +287,7 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
     for size in dataset_sizes:
         subset = movies[:size]
 
+        # hashmap memory
         tracemalloc.start()
         hm = HashMap()
         for movie in subset:
@@ -277,6 +297,7 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
         tracemalloc.stop()
         hm_memory_mb = hm_current / (1024 * 1024)
 
+        # trie memory
         tracemalloc.start()
         trie = Trie()
         for movie in subset:
@@ -288,6 +309,7 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
         results[size] = {
             "hashmap_memory_mb": hm_memory_mb,
             "trie_memory_mb": trie_memory_mb,
+            # hashmap holds 2 entries per movie, trie holds 1
             "hashmap_per_item_kb": (hm_memory_mb * 1024) / (size * 2),
             "trie_per_item_kb": (trie_memory_mb * 1024) / size,
         }
@@ -300,6 +322,8 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
 
     return results
 
+
+# final summary table 
 def print_summary(insertion: dict, exact: dict, prefix: dict, trie_vs_hm: dict):
     
 
