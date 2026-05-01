@@ -66,3 +66,8 @@ def benchmark_insertion(movies: list) -> dict:
     print("  theoretical: hashmap O(1) avg per insert, trie O(k) where k=title length")
     
 
+    header = f"{'Size':<10} {'HashMap (s)':<22} {'Trie (s)':<22}"
+    print(header)
+
+    results = {}
+
