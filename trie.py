@@ -58,3 +58,15 @@ class Trie:
             node = node.children[char]
 
         return node.movies if node.is_end_of_word else []
+    def starts_with(self, prefix: str) -> bool:
+        key = prefix.lower()
+        node = self._root
+
+        for char in key:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
+
+    def __len__(self) -> int:
+        return self._size
