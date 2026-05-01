@@ -84,3 +84,15 @@ def benchmark_insertion(movies: list) -> dict:
             trie = Trie()
             for movie in subset:
                 trie.insert(movie.title, movie)
+
+        hm_time = _average_time(do_hashmap_insert)
+        trie_time = _average_time(do_trie_insert)
+
+        results[size] = {
+            "hashmap_insert": hm_time,
+            "trie_insert": trie_time,
+        }
+
+        print(f"{size:<10} {hm_time:<22.6f} {trie_time:<22.6f}")
+
+    return results
