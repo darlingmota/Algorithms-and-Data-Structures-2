@@ -71,3 +71,6 @@ def benchmark_insertion(movies: list) -> dict:
 
     results = {}
 
+    for size in DATASET_SIZES:
+        subset = movies[:size]
+
