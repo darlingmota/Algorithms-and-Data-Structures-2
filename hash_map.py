@@ -12,3 +12,11 @@ class HashMap:
         self._capacity = initial_capacity
         self._size = 0
         self._buckets = [None] * self._capacity
+    def _hash(self, key) -> int:
+        key_str = str(key).lower()
+        hash_value = 0
+        prime = 31
+        mod = self._capacity
+        for char in key_str:
+            hash_value = (hash_value * prime + ord(char)) % mod
+        return hash_value
