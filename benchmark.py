@@ -291,3 +291,12 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
             "hashmap_per_item_kb": (hm_memory_mb * 1024) / (size * 2),
             "trie_per_item_kb": (trie_memory_mb * 1024) / size,
         }
+
+        print(f"\n  Size: {size:,} movies")
+        print(f"    HashMap : {hm_memory_mb:.2f} MB  ({results[size]['hashmap_per_item_kb']:.2f} KB per entry)")
+        print(f"    Trie    : {trie_memory_mb:.2f} MB  ({results[size]['trie_per_item_kb']:.2f} KB per movie)")
+        ratio = trie_memory_mb / hm_memory_mb if hm_memory_mb > 0 else 0
+        print(f"    Trie uses {ratio:.2f}x as much memory as HashMap")
+
+    return results
+
