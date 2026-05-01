@@ -28,3 +28,7 @@ class HashMap:
     def insert(self, key, value):
         if (self._size / self._capacity) >= self.LOAD_FACTOR_THRESHOLD:
             self._resize()
+
+        index = self._hash(key)
+        node = self._buckets[index]
+
