@@ -1,5 +1,7 @@
 
+#  hashmap built from scratch.
 
+# A single node in a chain. Each bucket is a linked list of these.
 class HashMapNode:
     def __init__(self, key, value):
         self.key = key
@@ -9,6 +11,7 @@ class HashMapNode:
 
 class HashMap:
 
+    # resize once we hit 75% full 
     LOAD_FACTOR_THRESHOLD = 0.75
 
     def __init__(self, initial_capacity: int = 1024):
@@ -16,6 +19,8 @@ class HashMap:
         self._size = 0
         self._buckets = [None] * self._capacity
 
+    # polynomial rolling hash 
+    # if the key is an int i just convert it to a string first
     def _hash(self, key) -> int:
         key_str = str(key).lower()
         hash_value = 0
@@ -25,22 +30,29 @@ class HashMap:
             hash_value = (hash_value * prime + ord(char)) % mod
         return hash_value
 
+    # insert a key/value pair or update if the key already exists
     def insert(self, key, value):
+        # check if we need to resize before adding
         if (self._size / self._capacity) >= self.LOAD_FACTOR_THRESHOLD:
             self._resize()
 
         index = self._hash(key)
         node = self._buckets[index]
 
+        # walk the chain if the key is already there just update the value
         while node is not None:
             if node.key == key:
                 node.value = value
                 return
             node = node.next
+
+        # key not in the chain so add a new node at the head
         new_node = HashMapNode(key, value)
         new_node.next = self._buckets[index]
         self._buckets[index] = new_node
         self._size += 1
+
+    # exact lookup by key. Returns None if the key isn't found.
     def search(self, key):
         index = self._hash(key)
         node = self._buckets[index]
@@ -49,6 +61,8 @@ class HashMap:
                 return node.value
             node = node.next
         return None
+
+    # remove a key. Returns True if it was deleted, False if it wasn't there.
     def delete(self, key) -> bool:
         index = self._hash(key)
         node = self._buckets[index]
@@ -69,6 +83,7 @@ class HashMap:
     def __len__(self) -> int:
         return self._size
 
+    # double the capacity and rehash everything
     def _resize(self):
         old_buckets = self._buckets
         self._capacity *= 2
@@ -81,7 +96,9 @@ class HashMap:
                 self.insert(node.key, node.value)
                 node = node.next
 
+    # helpers
 
     def load_factor(self) -> float:
         return self._size / self._capacity
 
+    # gives me chain length info so I can show the hash function isn't terrible
