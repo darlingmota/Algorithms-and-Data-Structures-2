@@ -41,3 +41,23 @@ def load_movies(movies_path: str, ratings_path: str = None) -> list:
             print(f"[DataLoader] error: ratings file not found at '{ratings_path}'")
             print(f"[DataLoader] Continuing without rating data.\n")
 
+    # load movies.csv and attach the aggregated rating stats
+    movies = []
+    print(f"[DataLoader] Loading movies from: {movies_path}")
+
+    with open(movies_path, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            mid = int(row['movieId'])
+            title = row['title'].strip()
+            genres = row['genres'].strip()
+
+            avg_rating = 0.0
+            rating_count = 0
+
+            if mid in rating_totals:
+                total, count = rating_totals[mid]
+                avg_rating = round(total / count, 4)
+                rating_count = count
+
+            movies.append(Movie(mid, title, genres, avg_rating, rating_count))
