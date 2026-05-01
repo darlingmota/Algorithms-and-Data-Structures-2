@@ -57,3 +57,5 @@ def linear_exact_search_by_id(movies: list, movie_id: int):
 def linear_prefix_search(movies: list, prefix: str) -> list:
     prefix_lower = prefix.lower()
     return [m for m in movies if m.title.lower().startswith(prefix_lower)]
+
+
