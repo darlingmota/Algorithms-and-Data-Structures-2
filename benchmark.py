@@ -277,3 +277,11 @@ def benchmark_memory_usage(movies: list, dataset_sizes: list = None) -> dict:
         tracemalloc.stop()
         hm_memory_mb = hm_current / (1024 * 1024)
 
+        tracemalloc.start()
+        trie = Trie()
+        for movie in subset:
+            trie.insert(movie.title, movie)
+        trie_current, _ = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        trie_memory_mb = trie_current / (1024 * 1024)
+
