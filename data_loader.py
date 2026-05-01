@@ -18,3 +18,18 @@ def load_movies(movies_path: str, ratings_path: str = None) -> list:
         print(f"[DataLoader] Streaming ratings from: {ratings_path}")
         print(f"[DataLoader] File size: {file_size_mb:.1f} MB - row-by-row streaming...")
 
+        rows_processed = 0
+        with open(ratings_path, newline='', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            next(reader)  # skip header line: userId,movieId,rating,timestamp
+            for row in reader:
+                mid = int(row[1])
+                rating = float(row[2])
+                if mid not in rating_totals:
+                    rating_totals[mid] = [0.0, 0]
+                rating_totals[mid][0] += rating
+                rating_totals[mid][1] += 1
+                rows_processed += 1
+                # print a progress update every 2 million rows so I know it's still alive
+                if rows_processed % 2_000_000 == 0:
+                    print(f"[DataLoader]   ... {rows_processed:,} ratings processed")
