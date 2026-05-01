@@ -69,3 +69,15 @@ class HashMap:
     def __len__(self) -> int:
         return self._size
 
+    def _resize(self):
+        old_buckets = self._buckets
+        self._capacity *= 2
+        self._buckets = [None] * self._capacity
+        self._size = 0  # gets recounted as we re insert
+
+        for bucket in old_buckets:
+            node = bucket
+            while node is not None:
+                self.insert(node.key, node.value)
+                node = node.next
+
