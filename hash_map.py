@@ -102,3 +102,21 @@ class HashMap:
         return self._size / self._capacity
 
     # gives me chain length info so I can show the hash function isn't terrible
+    def collision_stats(self) -> dict:
+        chain_lengths = []
+        for bucket in self._buckets:
+            length = 0
+            node = bucket
+            while node is not None:
+                length += 1
+                node = node.next
+            chain_lengths.append(length)
+
+        non_empty = [l for l in chain_lengths if l > 0]
+        return {
+            "total_buckets": self._capacity,
+            "occupied_buckets": len(non_empty),
+            "max_chain_length": max(chain_lengths) if chain_lengths else 0,
+            "avg_chain_length": sum(non_empty) / len(non_empty) if non_empty else 0,
+            "load_factor": self.load_factor(),
+        }
