@@ -59,3 +59,8 @@ def linear_prefix_search(movies: list, prefix: str) -> list:
     return [m for m in movies if m.title.lower().startswith(prefix_lower)]
 
 
+def benchmark_insertion(movies: list) -> dict:
+    
+    print("benchmark 1 - insertion time")
+    print(f"  trials per measurement: {TRIALS}")
+    print("  theoretical: hashmap O(1) avg per insert, trie O(k) where k=title length")
