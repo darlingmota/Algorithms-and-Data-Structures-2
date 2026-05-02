@@ -65,3 +65,10 @@ def demo_trie(movies: list):
         trie.insert(movie.title, movie)
 
     print(f"  total titles inserted : {len(trie):,}")
+    test_prefixes = ["The Dark", "Star Wars", "Toy", "Inc"]
+    for prefix in test_prefixes:
+        results = trie.search_prefix(prefix, max_results=5)
+        print(f"\n  Prefix: '{prefix}'  ->  {len(results)} matches (showing up to 5):")
+        for m in results[:5]:
+            print(f"    - {m.title}  [{', '.join(m.genres)}]  avg_rating={m.avg_rating:.2f}")
+
