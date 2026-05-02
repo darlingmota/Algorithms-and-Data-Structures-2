@@ -33,3 +33,8 @@ def demo_hashmap(movies: list):
 
     print(f"  Total entries  : {len(hm):,}  (titles + IDs = {len(movies)*2:,})")
 
+    test_title = "Toy Story (1995)"
+    result = hm.search(test_title.lower())
+    print(f"\n  Search by title: '{test_title}'")
+    print(f"  Result         : {result}")
+
