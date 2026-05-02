@@ -93,3 +93,4 @@ def main():
         print("[main]       Drop the MovieLens 20M ratings.csv next to main.py to include ratings.\n")
 
     movies = load_movies(movies_path, ratings_path)
+    random.seed(42)
