@@ -82,3 +82,14 @@ def demo_trie(movies: list):
     print(f"  starts_with('zzzzz') : {trie.starts_with('zzzzz')}")
 
 
+def main():
+    movies_path = MOVIES_PATH if os.path.exists(MOVIES_PATH) else "/documents/darllingsilveiradamota/movies.csv"
+
+    if os.path.exists(RATINGS_PATH):
+        ratings_path = RATINGS_PATH
+    else:
+        ratings_path = None
+        print("[main] error: ratings.csv not found.")
+        print("[main]       Drop the MovieLens 20M ratings.csv next to main.py to include ratings.\n")
+
+    movies = load_movies(movies_path, ratings_path)
