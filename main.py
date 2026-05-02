@@ -42,3 +42,7 @@ def demo_hashmap(movies: list):
     result_id = hm.search(test_id)
     print(f"\n  Search by ID   : {test_id}")
     print(f"  Result         : {result_id}")
+    missing = hm.search("this movie does not exist")
+    print(f"\n  Missing key    : 'this movie does not exist'")
+    print(f"  Result         : {missing}")
+
