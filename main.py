@@ -104,3 +104,19 @@ def main():
     memory_results = benchmark_memory_usage(movies, DATASET_SIZES)
 
     print_summary(insertion_results, exact_results, prefix_results, trie_vs_hm_results)
+   
+    print("\nmemory usage summary\n")
+
+    print(f"\n{'Size':<8} {'HashMap (MB)':>14} {'Trie (MB)':>14} {'Trie/HM':>10} "
+          f"{'HM (KB/item)':>14} {'Trie (KB/item)':>16}")
+    print("-" * 80)
+    for size, mem in memory_results.items():
+        ratio = mem['trie_memory_mb'] / mem['hashmap_memory_mb'] if mem['hashmap_memory_mb'] > 0 else 0
+        print(f"{size:<8} {mem['hashmap_memory_mb']:14.2f} {mem['trie_memory_mb']:14.2f} "
+              f"{ratio:9.2f}x {mem['hashmap_per_item_kb']:14.2f} {mem['trie_per_item_kb']:16.2f}")
+
+    print("\nbenchmarks complete.")
+
+
+if __name__ == "__main__":
+    main()
