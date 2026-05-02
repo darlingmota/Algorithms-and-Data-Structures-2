@@ -54,3 +54,14 @@ def demo_hashmap(movies: list):
     print(f"    Max chain length : {stats['max_chain_length']}")
     print(f"    Avg chain length : {stats['avg_chain_length']:.4f}")
 
+
+def demo_trie(movies: list):
+
+    print("\ndemo: trie operations\n")
+  
+
+    trie = Trie()
+    for movie in movies:
+        trie.insert(movie.title, movie)
+
+    print(f"  total titles inserted : {len(trie):,}")
