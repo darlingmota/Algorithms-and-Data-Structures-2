@@ -20,3 +20,10 @@ from benchmark import (
 
 MOVIES_PATH = "movies.csv"
 RATINGS_PATH = "ratings.csv"   # the MovieLens 20M ratings file
+
+def demo_hashmap(movies: list):
+    
+    print("demo - hashmap operations")
+    
+
+    hm = HashMap()
