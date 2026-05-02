@@ -78,3 +78,7 @@ def demo_trie(movies: list):
     for m in exact_results:
         print(f"    -> {m}")
 
+    print(f"\n  starts_with('shrek') : {trie.starts_with('shrek')}")
+    print(f"  starts_with('zzzzz') : {trie.starts_with('zzzzz')}")
+
+
