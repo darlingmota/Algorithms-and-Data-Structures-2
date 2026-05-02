@@ -97,3 +97,9 @@ def main():
     demo_hashmap(movies)
     demo_trie(movies)
 
+    insertion_results = benchmark_insertion(movies)
+    exact_results = benchmark_exact_search(movies)
+    prefix_results = benchmark_prefix_search(movies)
+    trie_vs_hm_results = benchmark_trie_vs_hashmap_exact(movies)
+    memory_results = benchmark_memory_usage(movies, DATASET_SIZES)
+
