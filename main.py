@@ -27,3 +27,9 @@ def demo_hashmap(movies: list):
     
 
     hm = HashMap()
+    for movie in movies:
+        hm.insert(movie.title.lower(), movie)
+        hm.insert(movie.movie_id, movie)
+
+    print(f"  Total entries  : {len(hm):,}  (titles + IDs = {len(movies)*2:,})")
+
