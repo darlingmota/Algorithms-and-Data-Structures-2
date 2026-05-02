@@ -103,3 +103,4 @@ def main():
     trie_vs_hm_results = benchmark_trie_vs_hashmap_exact(movies)
     memory_results = benchmark_memory_usage(movies, DATASET_SIZES)
 
+    print_summary(insertion_results, exact_results, prefix_results, trie_vs_hm_results)
