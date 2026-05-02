@@ -46,3 +46,11 @@ def demo_hashmap(movies: list):
     print(f"\n  Missing key    : 'this movie does not exist'")
     print(f"  Result         : {missing}")
 
+    stats = hm.collision_stats()
+    print(f"\n  hashmap diagnostics:")
+    print(f"    Capacity         : {stats['total_buckets']:,}")
+    print(f"    Occupied buckets : {stats['occupied_buckets']:,}")
+    print(f"    Load factor      : {stats['load_factor']:.4f}")
+    print(f"    Max chain length : {stats['max_chain_length']}")
+    print(f"    Avg chain length : {stats['avg_chain_length']:.4f}")
+
