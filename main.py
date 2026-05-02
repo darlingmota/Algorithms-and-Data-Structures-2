@@ -72,3 +72,9 @@ def demo_trie(movies: list):
         for m in results[:5]:
             print(f"    - {m.title}  [{', '.join(m.genres)}]  avg_rating={m.avg_rating:.2f}")
 
+    exact_title = "Pulp Fiction (1994)"
+    exact_results = trie.search_exact(exact_title)
+    print(f"\n  Exact Trie search: '{exact_title}'")
+    for m in exact_results:
+        print(f"    -> {m}")
+
