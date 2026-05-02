@@ -16,3 +16,7 @@ from benchmark import (
     DATASET_SIZES,
 )
 
+
+
+MOVIES_PATH = "movies.csv"
+RATINGS_PATH = "ratings.csv"   # the MovieLens 20M ratings file
