@@ -38,3 +38,7 @@ def demo_hashmap(movies: list):
     print(f"\n  Search by title: '{test_title}'")
     print(f"  Result         : {result}")
 
+    test_id = 1
+    result_id = hm.search(test_id)
+    print(f"\n  Search by ID   : {test_id}")
+    print(f"  Result         : {result_id}")
